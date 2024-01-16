@@ -1,0 +1,3 @@
+[deps]
+Documenter = "e30172f5-a6a5-5a46-863b-614d45cd2de4"
+XAIDocs = "02fa2cf1-3873-44c9-9e9f-421f1143b7d7"

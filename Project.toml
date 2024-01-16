@@ -1,0 +1,7 @@
+name = "XAIDocs"
+uuid = "02fa2cf1-3873-44c9-9e9f-421f1143b7d7"
+authors = ["Adrian Hill <gh@adrianhill.de>"]
+version = "1.0.0-DEV"
+
+[compat]
+julia = "1.6"
