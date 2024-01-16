@@ -1,5 +1,1 @@
-module XAIDocs
-
-# Write your package code here.
-
-end
+module XAIDocs end
