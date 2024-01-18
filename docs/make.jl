@@ -1,3 +1,12 @@
+# Script to build the Julia-XAI MultiDocumenter docs.
+#
+#   julia --project docs/make.jl [--temp] [deploy]
+#
+# When `deploy` is passed as an argument, it goes into deployment mode
+# and attempts to push the generated site to gh-pages. You can also pass
+# `--temp`, in which case the source repositories are cloned into a temporary
+# directory (as opposed to `docs/clones`).
+
 import MultiDocumenter as MD
 
 clonedir = mktempdir()
@@ -41,5 +50,48 @@ MD.make(
     search_engine = MD.SearchConfig(
         index_versions = ["stable"],
         engine = MD.FlexSearch
-    )
+    ),
+    rootpath = "/XAIDocs/",
+    canonical_domain = "https://julia-xai.github.io/",
+    sitemap = true,
 )
+
+if "deploy" in ARGS
+    @warn "Deploying to GitHub" ARGS
+    gitroot = normpath(joinpath(@__DIR__, ".."))
+    run(`git pull`)
+    outbranch = "gh-pages"
+    has_outbranch = true
+    if !success(`git checkout $outbranch`)
+        has_outbranch = false
+        if !success(`git switch --orphan $outbranch`)
+            @error "Cannot create new orphaned branch $outbranch."
+            exit(1)
+        end
+    end
+    for file in readdir(gitroot; join = true)
+        endswith(file, ".git") && continue
+        rm(file; force = true, recursive = true)
+    end
+    for file in readdir(outpath)
+        cp(joinpath(outpath, file), joinpath(gitroot, file))
+    end
+    run(`git add .`)
+    if success(`git commit -m 'Aggregate documentation'`)
+        @info "Pushing updated documentation."
+        if has_outbranch
+            run(`git push`)
+        else
+            run(`git push -u origin $outbranch`)
+        end
+        run(`git checkout main`)
+    else
+        @info "No changes to aggregated documentation."
+    end
+else
+    @info "Skipping deployment, 'deploy' not passed. Generated files in docs/out." ARGS
+    outdir = joinpath(@__DIR__, "out")
+    if outdir != outpath
+        cp(outpath, outdir, force = true)
+    end
+end
