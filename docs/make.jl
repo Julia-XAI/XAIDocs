@@ -1,23 +1,45 @@
-using XAIDocs
-using Documenter
+import MultiDocumenter as MD
 
-DocMeta.setdocmeta!(XAIDocs, :DocTestSetup, :(using XAIDocs); recursive=true)
+clonedir = mktempdir()
 
-makedocs(;
-    modules=[XAIDocs],
-    authors="Adrian Hill <gh@adrianhill.de>",
-    sitename="XAIDocs.jl",
-    format=Documenter.HTML(;
-        canonical="https://Julia-XAI.github.io/XAIDocs.jl",
-        edit_link="main",
-        assets=String[],
-    ),
-    pages=[
-        "Home" => "index.md",
-    ],
-)
+docs = [
+    MD.DropdownNav("Methods", [
+        MD.MultiDocRef(
+            upstream = joinpath(clonedir, "ExplainableAI"),
+            path = "explainableai",
+            name = "ExplainableAI.jl",
+            giturl = "https://github.com/Julia-XAI/ExplainableAI.jl.git",
+        ),
+        MD.MultiDocRef(
+            upstream = joinpath(clonedir, "RelevancePropagation"),
+            path = "RelevancePropagation",
+            name = "RelevancePropagation.jl",
+            giturl = "https://github.com/Julia-XAI/RelevancePropagation.jl.git",
+        ),
+    ]),
+    MD.DropdownNav("Heatmapping", [
+        MD.MultiDocRef(
+            upstream = joinpath(clonedir, "VisionHeatmaps"),
+            path = "VisionHeatmaps",
+            name = "VisionHeatmaps.jl",
+            giturl = "https://github.com/Julia-XAI/VisionHeatmaps.jl.git",
+        ),
+        MD.MultiDocRef(
+            upstream = joinpath(clonedir, "TextHeatmaps"),
+            path = "TextHeatmaps",
+            name = "TextHeatmaps.jl",
+            giturl = "https://github.com/Julia-XAI/TextHeatmaps.jl.git",
+        ),
+    ]),
+]
 
-deploydocs(;
-    repo="github.com/Julia-XAI/XAIDocs.jl",
-    devbranch="main",
+outpath = joinpath(@__DIR__, "out")
+
+MD.make(
+    outpath,
+    docs;
+    search_engine = MD.SearchConfig(
+        index_versions = ["stable"],
+        engine = MD.FlexSearch
+    )
 )
