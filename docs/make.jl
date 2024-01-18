@@ -9,7 +9,12 @@
 
 import MultiDocumenter as MD
 
-clonedir = mktempdir()
+clonedir = ("--temp" in ARGS) ? mktempdir() : joinpath(@__DIR__, "clones")
+outpath = mktempdir()
+@info """
+Cloning packages into: $(clonedir)
+Building aggregate site into: $(outpath)
+"""
 
 docs = [
     MD.DropdownNav("Methods", [

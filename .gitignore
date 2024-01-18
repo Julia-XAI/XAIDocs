@@ -6,6 +6,7 @@
 /docs/Manifest.toml
 /docs/build/
 /docs/out/
+/docs/clones/
 
 # VSCode
 .vscode/
