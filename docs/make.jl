@@ -47,8 +47,6 @@ docs = [
     ]),
 ]
 
-outpath = joinpath(@__DIR__, "out")
-
 MD.make(
     outpath,
     docs;
