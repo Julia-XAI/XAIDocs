@@ -18,58 +18,61 @@ Building aggregate site into: $(outpath)
 """
 
 docs = [
-    MultiDocRef(
-        upstream = joinpath(clonedir, "XAIBase"),
-        path = "XAIBase",
-        name = "Getting Started",
-        giturl = "https://github.com/Julia-XAI/XAIBase.jl.git",
+    MultiDocRef(;
+        upstream=joinpath(clonedir, "XAIBase"),
+        path="XAIBase",
+        name="Getting Started",
+        giturl="https://github.com/Julia-XAI/XAIBase.jl.git",
     ),
-    DropdownNav("Methods", [
-        MultiDocRef(
-            upstream = joinpath(clonedir, "ExplainableAI"),
-            path = "ExplainableAI",
-            name = "ExplainableAI.jl",
-            giturl = "https://github.com/Julia-XAI/ExplainableAI.jl.git",
-        ),
-        MultiDocRef(
-            upstream = joinpath(clonedir, "RelevancePropagation"),
-            path = "RelevancePropagation",
-            name = "RelevancePropagation.jl",
-            giturl = "https://github.com/Julia-XAI/RelevancePropagation.jl.git",
-        ),
-    ]),
-    DropdownNav("Heatmapping", [
-        MultiDocRef(
-            upstream = joinpath(clonedir, "VisionHeatmaps"),
-            path = "VisionHeatmaps",
-            name = "VisionHeatmaps.jl",
-            giturl = "https://github.com/Julia-XAI/VisionHeatmaps.jl.git",
-        ),
-        MultiDocRef(
-            upstream = joinpath(clonedir, "TextHeatmaps"),
-            path = "TextHeatmaps",
-            name = "TextHeatmaps.jl",
-            giturl = "https://github.com/Julia-XAI/TextHeatmaps.jl.git",
-        ),
-    ]),
-    MultiDocRef(
-        upstream = joinpath(clonedir, "XAIBase"),
-        path = "XAIBase",
-        name = "Interface",
-        giturl = "https://github.com/Julia-XAI/XAIBase.jl.git",
+    DropdownNav(
+        "Methods",
+        [
+            MultiDocRef(;
+                upstream=joinpath(clonedir, "ExplainableAI"),
+                path="ExplainableAI",
+                name="ExplainableAI.jl",
+                giturl="https://github.com/Julia-XAI/ExplainableAI.jl.git",
+            ),
+            MultiDocRef(;
+                upstream=joinpath(clonedir, "RelevancePropagation"),
+                path="RelevancePropagation",
+                name="RelevancePropagation.jl",
+                giturl="https://github.com/Julia-XAI/RelevancePropagation.jl.git",
+            ),
+        ],
+    ),
+    DropdownNav(
+        "Heatmapping",
+        [
+            MultiDocRef(;
+                upstream=joinpath(clonedir, "VisionHeatmaps"),
+                path="VisionHeatmaps",
+                name="VisionHeatmaps.jl",
+                giturl="https://github.com/Julia-XAI/VisionHeatmaps.jl.git",
+            ),
+            MultiDocRef(;
+                upstream=joinpath(clonedir, "TextHeatmaps"),
+                path="TextHeatmaps",
+                name="TextHeatmaps.jl",
+                giturl="https://github.com/Julia-XAI/TextHeatmaps.jl.git",
+            ),
+        ],
+    ),
+    MultiDocRef(;
+        upstream=joinpath(clonedir, "XAIBase"),
+        path="XAIBase",
+        name="Interface",
+        giturl="https://github.com/Julia-XAI/XAIBase.jl.git",
     ),
 ]
 
 MultiDocumenter.make(
     outpath,
     docs;
-    search_engine = SearchConfig(
-        index_versions = ["stable"],
-        engine = FlexSearch
-    ),
-    rootpath = "/XAIDocs/",
-    canonical_domain = "https://julia-xai.github.io/",
-    sitemap = true,
+    search_engine=SearchConfig(; index_versions=["stable"], engine=FlexSearch),
+    rootpath="/XAIDocs/",
+    canonical_domain="https://julia-xai.github.io/",
+    sitemap=true,
 )
 
 if "deploy" in ARGS
@@ -85,9 +88,9 @@ if "deploy" in ARGS
             exit(1)
         end
     end
-    for file in readdir(gitroot; join = true)
+    for file in readdir(gitroot; join=true)
         endswith(file, ".git") && continue
-        rm(file; force = true, recursive = true)
+        rm(file; force=true, recursive=true)
     end
     for file in readdir(outpath)
         cp(joinpath(outpath, file), joinpath(gitroot, file))
@@ -108,6 +111,6 @@ else
     @info "Skipping deployment, 'deploy' not passed. Generated files in docs/out." ARGS
     outdir = joinpath(@__DIR__, "out")
     if outdir != outpath
-        cp(outpath, outdir, force = true)
+        cp(outpath, outdir; force=true)
     end
 end
