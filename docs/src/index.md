@@ -6,7 +6,7 @@ with a focus on post-hoc, local input-space explanations of black-box models.
 In simpler terms, methods that try to answer the question 
 *"Which part of the input is responsible for the model's output?"*.
 
-![Julia-XAI organization](https://julia-xai.github.io/XAIDocs/docs/src/assets/org.png)
+![Julia-XAI organization](https://raw.githubusercontent.com/Julia-XAI/XAIDocs/gh-pages/dev/assets/org.png)
 
 The ecosystem is organized into several packages.
 As a user, you only need to install the packages that implement the methods you want to use.
