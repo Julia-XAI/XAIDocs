@@ -6,7 +6,7 @@ with a focus on post-hoc, local input-space explanations of black-box models.
 In simpler terms, methods that try to answer the question 
 *"Which part of the input is responsible for the model's output?"*.
 
-![Julia-XAI organization](https://raw.githubusercontent.com/Julia-XAI/XAIDocs/gh-pages/dev/assets/org.png)
+![Julia-XAI organization](https://raw.githubusercontent.com/Julia-XAI/XAIDocs/getting-started/dev/assets/org.png)
 
 The ecosystem is organized into several packages.
 As a user, you only need to install the packages that implement the methods you want to use.
@@ -14,13 +14,12 @@ As a user, you only need to install the packages that implement the methods you 
 As a developer, you can make use of the [XAIBase.jl interface](https://julia-xai.github.io/XAIDocs/XAIBase/dev/interface/)
 to quickly implement or prototype new methods without having to write boilerplate code.
 
-## Where to start
-##### New users:
+## New users
 Our recommended starting point into the Julia-XAI ecosystem is the 
 [Getting started](@ref docs-getting-started) guide.
 
-##### New developers:
-If you want to implement a method, take a look at the [common interface
+## New developers
+If you want to implement an XAI method, take a look at the [common interface
 defined in XAIBase.jl](https://julia-xai.github.io/XAIDocs/XAIBase/dev/interface/).
 
 ## Contributing

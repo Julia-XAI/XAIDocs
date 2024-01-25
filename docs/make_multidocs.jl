@@ -19,10 +19,11 @@ Building aggregate site into: $(outpath)
 
 docs = [
     MultiDocRef(;
-        upstream=joinpath(clonedir, "XAIBase"),
-        path="XAIBase",
+        upstream=joinpath(clonedir, "XAIDocs"),
+        path="XAIDocs",
+        branch="getting-started",
         name="Getting Started",
-        giturl="https://github.com/Julia-XAI/XAIBase.jl.git",
+        giturl="https://github.com/Julia-XAI/XAIDocs.git",
     ),
     DropdownNav(
         "Methods",
