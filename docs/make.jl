@@ -40,4 +40,4 @@ makedocs(;
     checkdocs = :exports, # only check docstrings in API reference if they are exported
 )
 
-deploydocs(; repo="github.com/Julia-XAI/XAIDocs")
+deploydocs(; repo="github.com/Julia-XAI/XAIDocs", branch="getting-started")
