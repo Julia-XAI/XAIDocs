@@ -1,13 +1,14 @@
 # Script to build the Julia-XAI MultiDocumenter docs.
 #
-#   julia --project docs/make.jl [--temp] [deploy]
+#   julia --project docs/make_multidocs.jl [--temp] [deploy]
 #
 # When `deploy` is passed as an argument, it goes into deployment mode
 # and attempts to push the generated site to gh-pages. You can also pass
 # `--temp`, in which case the source repositories are cloned into a temporary
 # directory (as opposed to `docs/clones`).
 
-import MultiDocumenter as MD
+using MultiDocumenter
+using MultiDocumenter: MultiDocRef, DropdownNav, FlexSearch, SearchConfig
 
 clonedir = ("--temp" in ARGS) ? mktempdir() : joinpath(@__DIR__, "clones")
 outpath = mktempdir()
@@ -17,42 +18,54 @@ Building aggregate site into: $(outpath)
 """
 
 docs = [
-    MD.DropdownNav("Methods", [
-        MD.MultiDocRef(
+    MultiDocRef(
+        upstream = joinpath(clonedir, "XAIBase"),
+        path = "XAIBase",
+        name = "Getting Started",
+        giturl = "https://github.com/Julia-XAI/XAIBase.jl.git",
+    ),
+    DropdownNav("Methods", [
+        MultiDocRef(
             upstream = joinpath(clonedir, "ExplainableAI"),
-            path = "explainableai",
+            path = "ExplainableAI",
             name = "ExplainableAI.jl",
             giturl = "https://github.com/Julia-XAI/ExplainableAI.jl.git",
         ),
-        MD.MultiDocRef(
+        MultiDocRef(
             upstream = joinpath(clonedir, "RelevancePropagation"),
             path = "RelevancePropagation",
             name = "RelevancePropagation.jl",
             giturl = "https://github.com/Julia-XAI/RelevancePropagation.jl.git",
         ),
     ]),
-    MD.DropdownNav("Heatmapping", [
-        MD.MultiDocRef(
+    DropdownNav("Heatmapping", [
+        MultiDocRef(
             upstream = joinpath(clonedir, "VisionHeatmaps"),
             path = "VisionHeatmaps",
             name = "VisionHeatmaps.jl",
             giturl = "https://github.com/Julia-XAI/VisionHeatmaps.jl.git",
         ),
-        MD.MultiDocRef(
+        MultiDocRef(
             upstream = joinpath(clonedir, "TextHeatmaps"),
             path = "TextHeatmaps",
             name = "TextHeatmaps.jl",
             giturl = "https://github.com/Julia-XAI/TextHeatmaps.jl.git",
         ),
     ]),
+    MultiDocRef(
+        upstream = joinpath(clonedir, "XAIBase"),
+        path = "XAIBase",
+        name = "Interface",
+        giturl = "https://github.com/Julia-XAI/XAIBase.jl.git",
+    ),
 ]
 
-MD.make(
+MultiDocumenter.make(
     outpath,
     docs;
-    search_engine = MD.SearchConfig(
+    search_engine = SearchConfig(
         index_versions = ["stable"],
-        engine = MD.FlexSearch
+        engine = FlexSearch
     ),
     rootpath = "/XAIDocs/",
     canonical_domain = "https://julia-xai.github.io/",
