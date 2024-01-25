@@ -1,5 +1,19 @@
 <?xml version="1.0" encoding="UTF-8"?>
 <urlset xmlns="http://www.sitemaps.org/schemas/sitemap/0.9">
+<url><loc>https://julia-xai.github.io/XAIDocs/ExplainableAI/stable/</loc></url>
+<url><loc>https://julia-xai.github.io/XAIDocs/ExplainableAI/stable/api/</loc></url>
+<url><loc>https://julia-xai.github.io/XAIDocs/ExplainableAI/stable/generated/advanced_lrp/</loc></url>
+<url><loc>https://julia-xai.github.io/XAIDocs/ExplainableAI/stable/generated/augmentations/</loc></url>
+<url><loc>https://julia-xai.github.io/XAIDocs/ExplainableAI/stable/generated/example/</loc></url>
+<url><loc>https://julia-xai.github.io/XAIDocs/ExplainableAI/stable/generated/heatmapping/</loc></url>
+<url><loc>https://julia-xai.github.io/XAIDocs/ExplainableAI/stable/generated/lrp/basics/</loc></url>
+<url><loc>https://julia-xai.github.io/XAIDocs/ExplainableAI/stable/generated/lrp/composites/</loc></url>
+<url><loc>https://julia-xai.github.io/XAIDocs/ExplainableAI/stable/generated/lrp/crp/</loc></url>
+<url><loc>https://julia-xai.github.io/XAIDocs/ExplainableAI/stable/generated/lrp/custom_layer/</loc></url>
+<url><loc>https://julia-xai.github.io/XAIDocs/ExplainableAI/stable/generated/lrp/custom_rules/</loc></url>
+<url><loc>https://julia-xai.github.io/XAIDocs/ExplainableAI/stable/lrp/api/</loc></url>
+<url><loc>https://julia-xai.github.io/XAIDocs/ExplainableAI/stable/lrp/developer/</loc></url>
+<url><loc>https://julia-xai.github.io/XAIDocs/ExplainableAI/stable/search/</loc></url>
 <url><loc>https://julia-xai.github.io/XAIDocs/RelevancePropagation/dev/</loc></url>
 <url><loc>https://julia-xai.github.io/XAIDocs/RelevancePropagation/dev/api/</loc></url>
 <url><loc>https://julia-xai.github.io/XAIDocs/RelevancePropagation/dev/developer/</loc></url>
@@ -12,18 +26,9 @@
 <url><loc>https://julia-xai.github.io/XAIDocs/TextHeatmaps/stable/example/</loc></url>
 <url><loc>https://julia-xai.github.io/XAIDocs/VisionHeatmaps/stable/</loc></url>
 <url><loc>https://julia-xai.github.io/XAIDocs/VisionHeatmaps/stable/example/</loc></url>
-<url><loc>https://julia-xai.github.io/XAIDocs/explainableai/stable/</loc></url>
-<url><loc>https://julia-xai.github.io/XAIDocs/explainableai/stable/api/</loc></url>
-<url><loc>https://julia-xai.github.io/XAIDocs/explainableai/stable/generated/advanced_lrp/</loc></url>
-<url><loc>https://julia-xai.github.io/XAIDocs/explainableai/stable/generated/augmentations/</loc></url>
-<url><loc>https://julia-xai.github.io/XAIDocs/explainableai/stable/generated/example/</loc></url>
-<url><loc>https://julia-xai.github.io/XAIDocs/explainableai/stable/generated/heatmapping/</loc></url>
-<url><loc>https://julia-xai.github.io/XAIDocs/explainableai/stable/generated/lrp/basics/</loc></url>
-<url><loc>https://julia-xai.github.io/XAIDocs/explainableai/stable/generated/lrp/composites/</loc></url>
-<url><loc>https://julia-xai.github.io/XAIDocs/explainableai/stable/generated/lrp/crp/</loc></url>
-<url><loc>https://julia-xai.github.io/XAIDocs/explainableai/stable/generated/lrp/custom_layer/</loc></url>
-<url><loc>https://julia-xai.github.io/XAIDocs/explainableai/stable/generated/lrp/custom_rules/</loc></url>
-<url><loc>https://julia-xai.github.io/XAIDocs/explainableai/stable/lrp/api/</loc></url>
-<url><loc>https://julia-xai.github.io/XAIDocs/explainableai/stable/lrp/developer/</loc></url>
-<url><loc>https://julia-xai.github.io/XAIDocs/explainableai/stable/search/</loc></url>
+<url><loc>https://julia-xai.github.io/XAIDocs/XAIBase/dev/</loc></url>
+<url><loc>https://julia-xai.github.io/XAIDocs/XAIBase/dev/api/</loc></url>
+<url><loc>https://julia-xai.github.io/XAIDocs/XAIBase/dev/generated/example/</loc></url>
+<url><loc>https://julia-xai.github.io/XAIDocs/XAIBase/dev/generated/heatmapping/</loc></url>
+<url><loc>https://julia-xai.github.io/XAIDocs/XAIBase/dev/interface/</loc></url>
 </urlset>
