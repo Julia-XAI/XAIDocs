@@ -11,4 +11,8 @@ ImageShow = "4e3cecfd-b093-5904-9786-8bbb286a6a31"
 Literate = "98b081ad-f1c9-55d3-8b20-4c87d4299306"
 MLDatasets = "eb30cadb-4394-5ae3-aed4-317e484a6458"
 MultiDocumenter = "87ed4bf0-c935-4a67-83c3-2a03bee4197c"
+RelevancePropagation = "0be6dd02-ae9e-43eb-b318-c6e81d6890d8"
 XAIBase = "9b48221d-a747-4c1b-9860-46a1d8ba24a7"
+
+[compat]
+ExplainableAI = "≥ 0.7"

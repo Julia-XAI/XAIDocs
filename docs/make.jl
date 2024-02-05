@@ -29,8 +29,8 @@ makedocs(;
     #! format: off
     pages = [
         "Home"            => "index.md",
-        "Getting started" => [
-            "Using analyzers" => "generated/example.md",
+        "Getting Started" => [
+            "Using Analyzers" => "generated/example.md",
             "Heatmapping"     => "generated/heatmapping.md"
         ],
         "API Reference"   => "api.md"

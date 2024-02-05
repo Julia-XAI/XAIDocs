@@ -14,11 +14,11 @@ As a user, you only need to install the packages that implement the methods you 
 As a developer, you can make use of the [XAIBase.jl interface](https://julia-xai.github.io/XAIDocs/XAIBase/)
 to quickly implement or prototype new methods without having to write boilerplate code.
 
-## New users
+## New Users
 Our recommended starting point into the Julia-XAI ecosystem is the 
-[Getting started](@ref docs-getting-started) guide.
+[*Getting Started*](@ref docs-getting-started) guide.
 
-## New developers
+## New Developers
 If you want to implement an XAI method, take a look at the [common interface
 defined in XAIBase.jl](https://julia-xai.github.io/XAIDocs/XAIBase/).
 
