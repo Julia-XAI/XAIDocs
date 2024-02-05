@@ -23,9 +23,9 @@ heatmap(input, analyzer)
 using ColorSchemes
 
 expl = analyze(input, analyzer)
-heatmap(expl; cs=ColorSchemes.jet)
+heatmap(expl; colorscheme=:jet)
 
-heatmap(expl; cs=ColorSchemes.inferno)
+heatmap(expl; colorscheme=:inferno)
 
 heatmap(expl; reduce=:sum)
 
@@ -37,9 +37,9 @@ heatmap(expl; rangescale=:centered)
 
 heatmap(expl; rangescale=:extrema)
 
-heatmap(expl; rangescale=:centered, cs=ColorSchemes.inferno)
+heatmap(expl; rangescale=:centered, colorscheme=:inferno)
 
-heatmap(expl; rangescale=:extrema, cs=ColorSchemes.inferno)
+heatmap(expl; rangescale=:extrema, colorscheme=:inferno)
 
 xs, ys = MNIST(Float32, :test)[1:100]
 batch = reshape(xs, 28, 28, 1, :); # reshape to WHCN format

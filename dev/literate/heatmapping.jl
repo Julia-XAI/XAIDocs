@@ -35,15 +35,15 @@ heatmap(input, analyzer)
 # ## Custom heatmap settings
 # ### Color schemes
 # We can partially or fully override presets by passing keyword arguments to [`heatmap`](@ref).
-# For example, we can use a custom color scheme from ColorSchemes.jl using the keyword argument `cs`:
+# For example, we can use a custom color scheme from ColorSchemes.jl using the keyword argument `colorscheme`:
 using ColorSchemes
 
 expl = analyze(input, analyzer)
-heatmap(expl; cs=ColorSchemes.jet)
+heatmap(expl; colorscheme=:jet)
 #-
-heatmap(expl; cs=ColorSchemes.inferno)
+heatmap(expl; colorscheme=:inferno)
 
-# Refer to the [ColorSchemes.jl catalogue](https://juliagraphics.github.io/ColorSchemes.jl/stable/basics/)
+# Refer to the [ColorSchemes.jl catalogue](https://juliagraphics.github.io/ColorSchemes.jl/stable/catalogue/)
 # for a gallery of available color schemes.
 
 # ### [Color channel reduction](@id docs-heatmap-reduce)
@@ -77,16 +77,16 @@ heatmap(expl; reduce=:maxabs)
 #   Values of zero will be mapped to the center of the color scheme.
 #
 # Depending on the color scheme, one of these presets may be more suitable than the other.
-# The default color scheme for `InputTimesGradient`, `seismic`, is centered around zero,
+# The default color scheme for `InputTimesGradient`, `:seismic`, is centered around zero,
 # making `:centered` a good choice:
 heatmap(expl; rangescale=:centered)
 #-
 heatmap(expl; rangescale=:extrema)
 # However, for the `inferno` color scheme, which is not centered around zero,
 # `:extrema` leads to a heatmap with higher contrast.
-heatmap(expl; rangescale=:centered, cs=ColorSchemes.inferno)
+heatmap(expl; rangescale=:centered, colorscheme=:inferno)
 #-
-heatmap(expl; rangescale=:extrema, cs=ColorSchemes.inferno)
+heatmap(expl; rangescale=:extrema, colorscheme=:inferno)
 
 # For the full list of `heatmap` keyword arguments, refer to the [`heatmap`](@ref) documentation.
 
