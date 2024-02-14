@@ -8,6 +8,7 @@
 /docs/out/
 /docs/clones/
 /docs/src/generated/
+/assets/Manifest.toml
 
 # VSCode
 .vscode/
