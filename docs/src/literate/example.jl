@@ -79,7 +79,11 @@ expl.val
 
 # ## Heatmapping basics
 # Since the array `expl.val` is not very informative at first sight,
-# we can visualize `Explanation`s by computing a [`heatmap`](@ref):
+# we can visualize `Explanation`s by computing a `heatmap` using either
+# [VisionHeatmaps.jl](https://julia-xai.github.io/XAIDocs/VisionHeatmaps/stable/) or
+# [TextHeatmaps.jl](https://julia-xai.github.io/XAIDocs/TextHeatmaps/stable/).
+using VisionHeatmaps
+
 heatmap(expl)
 
 # If we are only interested in the heatmap, we can combine analysis and heatmapping
