@@ -23,6 +23,11 @@ input = reshape(x, 28, 28, 1, :)
 convert2image(MNIST, x)
 
 # ## Automatic heatmap presets
+# We can visualize explanations as heatmaps using either
+# [VisionHeatmaps.jl](https://julia-xai.github.io/XAIDocs/VisionHeatmaps/stable/) for vision models or
+# [TextHeatmaps.jl](https://julia-xai.github.io/XAIDocs/TextHeatmaps/stable/) for language models:
+using VisionHeatmaps
+
 # The function [`heatmap`](@ref) automatically applies common presets for each method.
 #
 # ExplainableAI.jl's `InputTimesGradient` computes attributions,
