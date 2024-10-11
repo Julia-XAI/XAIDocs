@@ -1,5 +1,6 @@
 using ExplainableAI
 using RelevancePropagation
+using Zygote
 using Flux
 
 using BSON # hide
@@ -23,6 +24,8 @@ expl.analyzer
 expl.heatmap
 
 expl.val
+
+using VisionHeatmaps
 
 heatmap(expl)
 

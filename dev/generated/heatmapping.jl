@@ -1,4 +1,5 @@
 using ExplainableAI
+using Zygote
 using Flux
 
 using BSON # hide
@@ -13,6 +14,8 @@ x, y = MNIST(Float32, :test)[10]
 input = reshape(x, 28, 28, 1, :)
 
 convert2image(MNIST, x)
+
+using VisionHeatmaps
 
 analyzer = Gradient(model)
 heatmap(input, analyzer)
