@@ -25,7 +25,7 @@ jobs:
         with:
           version: '1'
       - run: |
-          julia --project=docs -e '
+          julia --project=docs --color=yes -e '
             using Pkg
             Pkg.instantiate()'
       - run: julia --project=docs --color=yes docs/make.jl
