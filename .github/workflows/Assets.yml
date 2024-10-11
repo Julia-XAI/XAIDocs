@@ -27,7 +27,7 @@ jobs:
             ${{ runner.os }}-test-
             ${{ runner.os }}-
       - name: Install dependencies
-        run: julia --project=assets -e 'using Pkg; Pkg.instantiate()'
+        run: julia --project=assets --color=yes -e 'using Pkg; Pkg.instantiate()'
       - name: Aggregate and deploy
         run: |
           julia --project=assets assets/make_assets.jl
