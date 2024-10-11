@@ -28,7 +28,7 @@ convert2image(MNIST, x)
 # [TextHeatmaps.jl](https://julia-xai.github.io/XAIDocs/TextHeatmaps/stable/) for language models:
 using VisionHeatmaps
 
-# The function [`heatmap`](@ref) automatically applies common presets for each method.
+# The function `heatmap` automatically applies common presets for each method.
 #
 # ExplainableAI.jl's `InputTimesGradient` computes attributions,
 # whereas gradient methods however are typically shown in grayscale:

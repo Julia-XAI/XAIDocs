@@ -14,7 +14,8 @@ Explanation
 ## Visualizing explanations
 `Explanation`s can be visualized using `heatmap`:
 ```@docs
-heatmap
+VisionHeatmaps.heatmap
+TextHeatmaps.heatmap
 ```
 
 ## Index
