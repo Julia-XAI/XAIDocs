@@ -11,10 +11,12 @@ ImageShow = "4e3cecfd-b093-5904-9786-8bbb286a6a31"
 Literate = "98b081ad-f1c9-55d3-8b20-4c87d4299306"
 MLDatasets = "eb30cadb-4394-5ae3-aed4-317e484a6458"
 RelevancePropagation = "0be6dd02-ae9e-43eb-b318-c6e81d6890d8"
+VisionHeatmaps = "27106da1-f8bc-4ca8-8c66-9b8289f1e035"
 XAIBase = "9b48221d-a747-4c1b-9860-46a1d8ba24a7"
 Zygote = "e88e6eb3-aa80-5325-afca-941959d7151f"
 
 [compat]
 ExplainableAI = "0.9"
 RelevancePropagation = "3"
+VisionHeatmaps = "1"
 XAIBase = "4"
