@@ -5,6 +5,7 @@
 # Note that most of the methods in the Julia-XAI ecosystem are **not** limited to Flux.jl models.
 using ExplainableAI
 using RelevancePropagation
+using Zygote
 using Flux
 
 using BSON # hide
