@@ -14,7 +14,9 @@ model = strip_softmax(model)
 model = canonize(model)
 
 # Load image
-url = HTTP.URI("https://raw.githubusercontent.com/adrhill/ExplainableAI.jl/gh-pages/assets/heatmaps/castle.jpg")
+url = HTTP.URI(
+    "https://raw.githubusercontent.com/adrhill/ExplainableAI.jl/gh-pages/assets/heatmaps/castle.jpg",
+)
 img = load(url)
 
 # Normalization used for Metalhead models, which use PyTorch weights
@@ -22,7 +24,8 @@ PYTORCH_MEAN = (0.485, 0.456, 0.406)
 PYTORCH_STD  = (0.229, 0.224, 0.225)
 
 # Preprocess input
-tfm = CenterResizeCrop((224, 224)) |> ImageToTensor() |> Normalize(PYTORCH_MEAN, PYTORCH_STD)
+tfm =
+    CenterResizeCrop((224, 224)) |> ImageToTensor() |> Normalize(PYTORCH_MEAN, PYTORCH_STD)
 input_data = apply(tfm, Image(img))
 input = view(PermutedDimsArray(input_data.data, (2, 1, 3)), :, :, :, :);
 
@@ -33,10 +36,10 @@ argmax(model(input))[1] != n_castle && error("Model doesn't correctly predict ca
 
 # Run XAI methods
 methods = Dict(
-    "InputTimesGradient"        => InputTimesGradient,
-    "Gradient"                  => Gradient,
-    "SmoothGrad"                => SmoothGrad,
-    "IntegratedGradients"       => IntegratedGradients,
+    "InputTimesGradient"  => InputTimesGradient,
+    "Gradient"            => Gradient,
+    "SmoothGrad"          => SmoothGrad,
+    "IntegratedGradients" => IntegratedGradients,
     # "GradCAM"                   => model -> GradCAM(model[1], model[2]),
     "LRP"                       => LRP,
     "LRPEpsilonGammaBox"        => model -> LRP(model, EpsilonGammaBox(-3.0f0, 3.0f0)),

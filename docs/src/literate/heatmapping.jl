@@ -1,6 +1,6 @@
 # # [Heatmapping](@id docs-heatmapping)
 # Since numerical explanations are not very informative at first sight,
-# we can visualize them by computing a [`heatmap`](@ref).
+# we can visualize them by computing a [`VisionHeatmaps.heatmap`](@ref).
 # This page showcases different options and preset for heatmapping,
 # building on the basics shown in the [*Getting started*](@ref docs-getting-started) section.
 #
@@ -40,7 +40,7 @@ heatmap(input, analyzer)
 
 # ## Custom heatmap settings
 # ### Color schemes
-# We can partially or fully override presets by passing keyword arguments to [`heatmap`](@ref).
+# We can partially or fully override presets by passing keyword arguments to [`VisionHeatmaps.heatmap`](@ref).
 # For example, we can use a custom color scheme from ColorSchemes.jl using the keyword argument `colorscheme`:
 using ColorSchemes
 
@@ -94,7 +94,7 @@ heatmap(expl; rangescale=:centered, colorscheme=:inferno)
 #-
 heatmap(expl; rangescale=:extrema, colorscheme=:inferno)
 
-# For the full list of `heatmap` keyword arguments, refer to the [`heatmap`](@ref) documentation.
+# For the full list of `heatmap` keyword arguments, refer to the [`VisionHeatmaps.heatmap`](@ref) documentation.
 
 # ## [Heatmapping batches](@id docs-heatmapping-batches)
 # Heatmapping also works with input batches.
@@ -102,7 +102,7 @@ heatmap(expl; rangescale=:extrema, colorscheme=:inferno)
 xs, ys = MNIST(Float32, :test)[1:100]
 batch = reshape(xs, 28, 28, 1, :); # reshape to WHCN format
 
-# The [`heatmap`](@ref) function automatically recognizes
+# The [`VisionHeatmaps.heatmap`](@ref) function automatically recognizes
 # that the explanation is batched and returns a `Vector` of images:
 heatmaps = heatmap(batch, analyzer)
 

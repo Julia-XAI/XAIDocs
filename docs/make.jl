@@ -1,6 +1,8 @@
 using Documenter
 using Literate
 using XAIBase
+using VisionHeatmaps
+using TextHeatmaps
 
 LITERATE_DIR = joinpath(@__DIR__, "src/literate")
 OUT_DIR = joinpath(@__DIR__, "src/generated")
@@ -22,7 +24,7 @@ end
 convert_literate(LITERATE_DIR, OUT_DIR)
 
 makedocs(;
-    modules  = [XAIBase],
+    modules  = [XAIBase, VisionHeatmaps, TextHeatmaps],
     sitename = "Julia-XAI",
     authors  = "Adrian Hill",
     format   = Documenter.HTML(; prettyurls=get(ENV, "CI", "false") == "true", assets=String[]),
@@ -37,7 +39,7 @@ makedocs(;
     ],
     #! format: on
     linkcheck = true,
-    warnonly=[:missing_docs],
+    warnonly  = [:missing_docs],
     checkdocs = :exports, # only check docstrings in API reference if they are exported
 )
 

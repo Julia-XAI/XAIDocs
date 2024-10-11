@@ -106,7 +106,7 @@ heatmap(expl)
 
 #md # !!! note
 #md #
-#md #     The output index can also be specified when calling [`heatmap`](@ref):
+#md #     The output index can also be specified when calling [`VisionHeatmaps.heatmap`](@ref):
 #md #     ```julia
 #md #     heatmap(input, analyzer, 5)
 #md #     ```
