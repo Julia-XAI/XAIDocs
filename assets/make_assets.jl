@@ -2,9 +2,11 @@
 # to generate up-to-date heatmaps for the docs and READMEs of the Julia-XAI ecosystem.
 using ExplainableAI
 using RelevancePropagation
-using Metalhead                   # pre-trained vision models
-using HTTP, FileIO, ImageMagick   # load image from URL
-using DataAugmentation            # preprocess image
+using VisionHeatmaps         # visualization of explanations as heatmaps
+using Zygote                 # load autodiff backend for gradient-based methods
+using Flux, Metalhead        # pre-trained vision models in Flux
+using DataAugmentation       # input preprocessing
+using HTTP, FileIO, ImageIO  # load image from URL
 
 assets_dir = "assets/heatmaps"
 
@@ -24,10 +26,11 @@ PYTORCH_MEAN = (0.485, 0.456, 0.406)
 PYTORCH_STD  = (0.229, 0.224, 0.225)
 
 # Preprocess input
-tfm =
-    CenterResizeCrop((224, 224)) |> ImageToTensor() |> Normalize(PYTORCH_MEAN, PYTORCH_STD)
-input_data = apply(tfm, Image(img))
-input = view(PermutedDimsArray(input_data.data, (2, 1, 3)), :, :, :, :);
+mean = (0.485f0, 0.456f0, 0.406f0)
+std = (0.229f0, 0.224f0, 0.225f0)
+tfm = CenterResizeCrop((224, 224)) |> ImageToTensor() |> Normalize(mean, std)
+input = apply(tfm, Image(img))               # apply DataAugmentation transform
+input = reshape(input.data, 224, 224, 3, :)  # unpack data and add batch dimension
 
 # Assert model weights are loaded correctly
 n_castle = 484
