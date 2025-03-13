@@ -8,6 +8,8 @@ using RelevancePropagation
 using Zygote
 using Flux
 
+using ImageShow
+
 using BSON # hide
 model = BSON.load("../model.bson", @__MODULE__)[:model] # load pre-trained LeNet-5 model
 
@@ -85,18 +87,18 @@ expl.val
 # [TextHeatmaps.jl](https://julia-xai.github.io/XAIDocs/TextHeatmaps/stable/).
 using VisionHeatmaps
 
-heatmap(expl)
+heatmap(expl) |> only
 
 # If we are only interested in the heatmap, we can combine analysis and heatmapping
 # into a single function call:
-heatmap(input, analyzer)
+heatmap(input, analyzer) |> only
 
 # ## Output selection
 # By passing an additional index to our call to [`analyze`](@ref),
 # we can compute an explanation with respect to a specific output index.
 # Let's see why the output wasn't interpreted as a 4 (output at index 5)
 expl = analyze(input, analyzer, 5)
-heatmap(expl)
+heatmap(expl) |> only
 
 # This heatmap shows us that the "upper loop" of the hand-drawn 9 has negative relevance
 # with respect to the output corresponding to digit 4!
@@ -117,7 +119,9 @@ expl = analyze(batch, analyzer);
 
 # This will return a single `Explanation` `expl` for the entire batch.
 # Calling `heatmap` on `expl` will detect the batch dimension and return a vector of heatmaps.
-heatmap(expl)
+hs = heatmap(expl)
+#-
+first(hs)
 
 ## Custom heatmaps
 
@@ -127,10 +131,10 @@ heatmap(expl)
 # heatmaps are shown in a blue-white-red color scheme.
 # Gradient methods however are typically shown in grayscale:
 analyzer = Gradient(model)
-heatmap(input, analyzer)
+heatmap(input, analyzer) |> only
 #-
 analyzer = InputTimesGradient(model)
-heatmap(input, analyzer)
+heatmap(input, analyzer) |> only
 
 # Using [VisionHeatmaps.jl](https://julia-xai.github.io/XAIDocs/VisionHeatmaps/stable/),
 # heatmaps can be heavily customized. 
