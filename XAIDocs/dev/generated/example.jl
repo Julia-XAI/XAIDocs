@@ -29,10 +29,14 @@ using VisionHeatmaps
 
 heatmap(expl)
 
-heatmap(input, analyzer)
+heatmap(expl) |> only
+
+heatmap(input, analyzer) |> only
 
 expl = analyze(input, analyzer, 5)
-heatmap(expl)
+heatmap(expl) |> only
+
+heatmap(input, analyzer, 5) |> only
 
 batchsize = 20
 xs, _ = MNIST(Float32, :test)[1:batchsize]
@@ -40,5 +44,8 @@ batch = reshape(xs, 28, 28, 1, :) # reshape to WHCN format
 expl = analyze(batch, analyzer);
 
 heatmap(expl)
+
+analyzer = SmoothGrad(model)
+heatmap(input, analyzer) |> only
 
 # This file was generated using Literate.jl, https://github.com/fredrikekre/Literate.jl
