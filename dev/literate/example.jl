@@ -46,7 +46,7 @@ input = reshape(x, 28, 28, 1, :);
 #md #     to come last in the input.
 #md #
 #md #     For vision models, the input is assumed to be in WHCN order
-#md #     (width, height, channels, batch dimension), which is Flux.jl's convention.
+#md #     (*width, height, channels, batch dimension*), which matches Flux.jl's convention.
 
 # ## Explanations
 # We can now select an analyzer of our choice and call [`analyze`](@ref)
@@ -87,29 +87,26 @@ using VisionHeatmaps
 
 heatmap(expl)
 
+# By default, to support batched explanations, a vector of heatmaps is returned. 
+# Since the following examples don't use batches, we will use the `only` function to unpack singleton heatmaps:
+heatmap(expl) |> only
+
 # If we are only interested in the heatmap, we can combine analysis and heatmapping
 # into a single function call:
-heatmap(input, analyzer)
-
-# For a more detailed explanation of the `heatmap` function,
-# refer to the [heatmapping section](@ref docs-heatmapping).
+heatmap(input, analyzer) |> only
 
 # ## Output selection
 # By passing an additional index to our call to [`analyze`](@ref),
 # we can compute an explanation with respect to a specific output index.
 # Let's see why the output wasn't interpreted as a 4 (output at index 5)
 expl = analyze(input, analyzer, 5)
-heatmap(expl)
+heatmap(expl) |> only
 
 # This heatmap shows us that the "upper loop" of the hand-drawn 9 has negative relevance
 # with respect to the output corresponding to digit 4!
 
-#md # !!! note
-#md #
-#md #     The output index can also be specified when calling [`VisionHeatmaps.heatmap`](@ref):
-#md #     ```julia
-#md #     heatmap(input, analyzer, 5)
-#md #     ```
+# The output index can also be specified when calling `heatmap`:
+heatmap(input, analyzer, 5) |> only
 
 # ## Analyzing batches
 # ExplainableAI also supports explanations of input batches:
@@ -122,5 +119,17 @@ expl = analyze(batch, analyzer);
 # Calling `heatmap` on `expl` will detect the batch dimension and return a vector of heatmaps.
 heatmap(expl)
 
-# For more information on heatmapping batches,
-# refer to the [heatmapping documentation](@ref docs-heatmapping-batches).
+# ## Heatmapping presets
+# The function `heatmap` automatically applies common presets for each method.
+# Since `LRP` computes attributions, previous heatmaps were shown in a divergent blue-black-red color scheme.
+# Methods based on input sensitivities like `SmoothGrad` however are typically shown in a sequential color scheme:
+analyzer = SmoothGrad(model)
+heatmap(input, analyzer) |> only
+
+#md # ## Custom heatmaps
+
+#md # !!! tip "Check out the VisionHeatmaps.jl documentation"
+#md #
+#md #     Using [VisionHeatmaps.jl](https://julia-xai.github.io/XAIDocs/VisionHeatmaps/stable/),
+#md #     heatmaps can be heavily customized. 
+#md #     Check out the [heatmapping documentation](https://julia-xai.github.io/XAIDocs/VisionHeatmaps/stable/) for more information.
