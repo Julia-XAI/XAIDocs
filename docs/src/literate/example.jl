@@ -91,9 +91,6 @@ heatmap(expl)
 # into a single function call:
 heatmap(input, analyzer)
 
-# For a more detailed explanation of the `heatmap` function,
-# refer to the [heatmapping section](@ref docs-heatmapping).
-
 # ## Output selection
 # By passing an additional index to our call to [`analyze`](@ref),
 # we can compute an explanation with respect to a specific output index.
