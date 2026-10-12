@@ -11,7 +11,7 @@ The return type of `analyze` is an `Attribution`:
 Attribution
 ```
 
-## Visualizing attributions
+## Visualizing feature attributions
 `Attribution`s can be visualized using `heatmap`:
 ```@docs
 VisionHeatmaps.heatmap

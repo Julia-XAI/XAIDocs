@@ -2,7 +2,7 @@
 # to generate up-to-date heatmaps for the docs and READMEs of the Julia-XAI ecosystem.
 using ExplainableAI
 using RelevancePropagation
-using VisionHeatmaps         # visualization of explanations as heatmaps
+using VisionHeatmaps         # visualization of feature attributions as heatmaps
 using Zygote                 # load autodiff backend for gradient-based methods
 using Flux, Metalhead        # pre-trained vision models in Flux
 using DataAugmentation       # input preprocessing
