@@ -2,28 +2,29 @@
 # to generate up-to-date heatmaps for the docs and READMEs of the Julia-XAI ecosystem.
 using ExplainableAI
 using RelevancePropagation
-using VisionHeatmaps         # visualization of explanations as heatmaps
+using VisionHeatmaps         # visualization of feature attributions as heatmaps
 using Zygote                 # load autodiff backend for gradient-based methods
 using Flux, Metalhead        # pre-trained vision models in Flux
 using DataAugmentation       # input preprocessing
 using HTTP, FileIO, ImageIO  # load image from URL
 
 assets_dir = "assets/heatmaps"
+mkpath.(joinpath.(assets_dir, ["castle", "streetsign"]))
 
 # Load model
-model = VGG(19; pretrain=true).layers
+model = VGG(19; pretrain = true).layers
 model = strip_softmax(model)
 model = canonize(model)
 
 # Load image
 url = HTTP.URI(
-    "https://raw.githubusercontent.com/adrhill/ExplainableAI.jl/gh-pages/assets/heatmaps/castle.jpg",
+    "https://raw.githubusercontent.com/Julia-XAI/ExplainableAI.jl/gh-pages/assets/heatmaps/castle.jpg",
 )
 img = load(url)
 
 # Normalization used for Metalhead models, which use PyTorch weights
 PYTORCH_MEAN = (0.485, 0.456, 0.406)
-PYTORCH_STD  = (0.229, 0.224, 0.225)
+PYTORCH_STD = (0.229, 0.224, 0.225)
 
 # Preprocess input
 mean = (0.485f0, 0.456f0, 0.406f0)
@@ -39,30 +40,35 @@ argmax(model(input))[1] != n_castle && error("Model doesn't correctly predict ca
 
 # Run XAI methods
 methods = Dict(
-    "InputTimesGradient"  => InputTimesGradient,
-    "Gradient"            => Gradient,
-    "SmoothGrad"          => SmoothGrad,
+    "InputTimesGradient" => InputTimesGradient,
+    "Gradient" => Gradient,
+    "SmoothGrad" => SmoothGrad,
     "IntegratedGradients" => IntegratedGradients,
     # "GradCAM"                   => model -> GradCAM(model[1], model[2]),
-    "LRP"                       => LRP,
-    "LRPEpsilonGammaBox"        => model -> LRP(model, EpsilonGammaBox(-3.0f0, 3.0f0)),
-    "LRPEpsilonPlus"            => model -> LRP(model, EpsilonPlus()),
-    "LRPEpsilonAlpha2Beta1"     => model -> LRP(model, EpsilonAlpha2Beta1()),
-    "LRPEpsilonPlusFlat"        => model -> LRP(model, EpsilonPlusFlat()),
+    "LRP" => LRP,
+    "LRPEpsilonGammaBox" => model -> LRP(model, EpsilonGammaBox(-3.0f0, 3.0f0)),
+    "LRPEpsilonPlus" => model -> LRP(model, EpsilonPlus()),
+    "LRPEpsilonAlpha2Beta1" => model -> LRP(model, EpsilonAlpha2Beta1()),
+    "LRPEpsilonPlusFlat" => model -> LRP(model, EpsilonPlusFlat()),
     "LRPEpsilonAlpha2Beta1Flat" => model -> LRP(model, EpsilonAlpha2Beta1Flat()),
 )
+
+# Default pipelines with the 0.1% and 99.9% percentiles clipped after pooling
+pipe_signed = SumPooling() |> PercentileClip() |> CenteredNormalization() |> Colormap(:berlin)
+pipe_unsigned = NormPooling() |> PercentileClip() |> ExtremaNormalization() |> Colormap(:batlow)
 
 for (name, method) in methods
     @info "Generating $name assets..."
     analyzer = method(model)
 
     # Max activated neuron corresponds to "castle"
-    expl = analyze(input, analyzer)
-    h = heatmap(expl)
+    attr = analyze(input, analyzer)
+    pipe = attr.pooling isa SignedPooling ? pipe_signed : pipe_unsigned
+    h = heatmap(attr, pipe) |> only
     save("$assets_dir/castle/$name.png", h)
 
     # Output neuron 920 corresponds to "street sign"
-    expl = analyze(input, analyzer, n_streetsign)
-    h = heatmap(expl)
+    attr = analyze(input, analyzer, n_streetsign)
+    h = heatmap(attr, pipe) |> only
     save("$assets_dir/streetsign/$name.png", h)
 end

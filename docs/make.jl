@@ -15,19 +15,20 @@ function convert_literate(dir_in, dir_out)
         if isdir(path)
             convert_literate(path, joinpath(dir_out, p))
         else # isfile
-            Literate.markdown(path, dir_out; documenter=true) # Markdown for Documenter.jl
+            Literate.markdown(path, dir_out; documenter = true) # Markdown for Documenter.jl
             Literate.notebook(path, dir_out) # .ipynb notebook
             Literate.script(path, dir_out) # .jl script
         end
     end
+    return
 end
 convert_literate(LITERATE_DIR, OUT_DIR)
 
 makedocs(;
-    modules  = [XAIBase, VisionHeatmaps, TextHeatmaps],
+    modules = [XAIBase, VisionHeatmaps, TextHeatmaps],
     sitename = "Julia-XAI",
-    authors  = "Adrian Hill",
-    format   = Documenter.HTML(; prettyurls=get(ENV, "CI", "false") == "true", assets=String[]),
+    authors = "Adrian Hill",
+    format = Documenter.HTML(; prettyurls = get(ENV, "CI", "false") == "true", assets = String[]),
     #! format: off
     pages = [
         "Home"            => "index.md",
@@ -36,8 +37,9 @@ makedocs(;
     ],
     #! format: on
     linkcheck = true,
-    warnonly  = [:missing_docs],
+    # Reexported docstrings link to XAIBase docs that aren't part of this manual
+    warnonly = [:missing_docs, :cross_references],
     checkdocs = :exports, # only check docstrings in API reference if they are exported
 )
 
-deploydocs(; repo="github.com/Julia-XAI/XAIDocs", branch="getting-started")
+deploydocs(; repo = "github.com/Julia-XAI/XAIDocs", branch = "getting-started")
