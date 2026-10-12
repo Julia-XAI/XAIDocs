@@ -42,7 +42,7 @@ input = reshape(x, 28, 28, 1, :);
 
 #md # !!! note "Input format"
 #md #
-#md #     To compute feature attributions, Julia-XAI methods assume the batch dimension
+#md #     For any feature attribution, Julia-XAI methods assume the batch dimension
 #md #     to come last in the input.
 #md #
 #md #     For vision models, the input is assumed to be in WHCN order
